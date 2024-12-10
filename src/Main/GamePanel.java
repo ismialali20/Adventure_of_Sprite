@@ -21,7 +21,8 @@ public class GamePanel extends JPanel implements Runnable {
     //map parameters
     public final int maxWorldCol = 50;
     public final int maxWorldRow = 50;
-
+    public final int worldWidth = tileSize * maxWorldCol;
+    public final int worldHeight = tileSize * maxWorldRow;
 
 
     int FPS = 60;
@@ -30,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable {
     TileManager tileM = new TileManager(this);
     KeyHandler keyIn = new KeyHandler();
     Thread gameThread;
-    Player player = new Player(this,keyIn);
+    public Player player = new Player(this,keyIn);
 
     public GamePanel(){
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));

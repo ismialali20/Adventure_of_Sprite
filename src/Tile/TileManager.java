@@ -20,7 +20,7 @@ public class TileManager {
 
         this.gp = gp;
         tile = new Tile[10];
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
+        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
 
         getTileImage();
         loadMap();
@@ -68,21 +68,21 @@ public class TileManager {
     public void draw(Graphics2D g2) {
         int col = 0;
         int row = 0;
-        int x = 0;
-        int y = 0;
 
-        while (col < gp.maxScreenCol && row < gp.maxScreenRow) {
+        while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
+
             int tileNum = mapTileNum[col][row];
 
-            g2.drawImage(tile[tileNum].image, x, y, gp.tileSize, gp.tileSize, null);
+            int worldX = col * gp.tileSize;
+            int worldY= row * gp.tileSize;
+            int ScreenX = worldX - gp.player.worldX + gp.player.screenX;
+            int ScreenY = worldY - gp.player.worldY + gp.player.screenY;
+            g2.drawImage(tile[tileNum].image, ScreenX, ScreenY, gp.tileSize, gp.tileSize, null);
             col++;
-            x += gp.tileSize;
 
-            if(col == gp.maxScreenCol){
+            if(col == gp.maxWorldCol){
                 col = 0;
-                x = 0;
                 row++;
-                y +=gp.tileSize;
 
             }
         }
